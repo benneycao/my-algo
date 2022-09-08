@@ -1,11 +1,13 @@
 package s05_arr;
 
-import java.util.Optional;
-
 public class MyArray {
     private int size;
     private int[] data;
     private int capacity;
+
+    public int size() {
+        return this.size;
+    }
 
     public MyArray(int capacity) {
         this.data = new int[capacity];
@@ -105,10 +107,10 @@ public class MyArray {
         arr.insert(0, 0);
         arr.printAll();
         MyArray a1 = new MyArray(4);
-        a1.insert(0,1);
-        a1.insert(1,2);
-        a1.insert(2,3);
-        a1.insert(3,4);
+        a1.insert(0, 1);
+        a1.insert(1, 2);
+        a1.insert(2, 3);
+        a1.insert(3, 4);
         a1.push(5);
         a1.push(6);
         a1.delete(0);
