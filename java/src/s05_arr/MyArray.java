@@ -59,7 +59,6 @@ public class MyArray {
     // 保证容器内部容量安全，如果新数组的长度超过当前容量，需要扩容
     private void ensureCapacityInternal() {
         if (this.size == capacity) {
-
             // 扩容
             this.capacity *= 2;
             int[] data = new int[this.capacity];
@@ -96,25 +95,6 @@ public class MyArray {
     }
 
     public static void main(String[] args) {
-        MyArray arr = new MyArray(5);
-        arr.push(1);
-        arr.push(2);
-        arr.push(3);
-        arr.push(4);
-        arr.push(5);
-        arr.push(1);
-        arr.pop();
-        arr.insert(0, 0);
-        arr.printAll();
-        MyArray a1 = new MyArray(4);
-        a1.insert(0, 1);
-        a1.insert(1, 2);
-        a1.insert(2, 3);
-        a1.insert(3, 4);
-        a1.push(5);
-        a1.push(6);
-        a1.delete(0);
-        a1.printAll();
     }
 
 
