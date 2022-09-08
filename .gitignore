@@ -2,3 +2,4 @@
 out
 .idea
 rust/target
+java/out

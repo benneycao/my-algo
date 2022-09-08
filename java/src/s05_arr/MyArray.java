@@ -21,6 +21,21 @@ public class MyArray {
         return data[index];
     }
 
+    /*
+     * 1. 删除指定位置的元素需要将后面的元素统一先前移动一位
+     * 2. 然后将数组的长度-1
+     * */
+    public boolean delete(int index) {
+        if (index < 0 || index >= size) {
+            throw new ArrayIndexOutOfBoundsException("删除的索引位置异常，请检查索引");
+        }
+        for (int i = index; i < size - 1; i++) {
+            data[i] = data[i + 1];
+        }
+        this.size -= 1;
+        return true;
+    }
+
     // 移除索引的最后一个元素
     public int pop() {
         if (size == 0) {
@@ -30,13 +45,49 @@ public class MyArray {
         return data[size - 1];
     }
 
-    public void push(int value) {
+    // 向数组最后添加元素
+    public boolean push(int value) {
+        // 长度 == 容量 进行扩容，不然会导致索引越界异常
+        ensureCapacityInternal();
         data[size] = value;
         this.size += 1;
-
+        return true;
     }
+
+    // 保证容器内部容量安全，如果新数组的长度超过当前容量，需要扩容
+    private void ensureCapacityInternal() {
+        if (this.size == capacity) {
+
+            // 扩容
+            this.capacity *= 2;
+            int[] data = new int[this.capacity];
+            for (int i = 0; i < this.size; i++) {
+                data[i] = this.data[i];
+            }
+            this.data = data;
+        }
+    }
+
+
+    /*
+     * 向数组的指定位置添加元素
+     * 1. 如果数组 size == capacity 要先扩容再添加元素
+     * 2. 添加元素需要向后移动数组
+     * */
+    public boolean insert(int index, int value) {
+        ensureCapacityInternal();
+        // 后移数组
+        for (int i = this.size; i > index; i--) {
+            data[i] = data[i - 1];
+        }
+        data[index] = value;
+        this.size += 1;
+        return true;
+    }
+
+
     public void printAll() {
-        for (int i = 0; i< size; ++i) {
+        for (int i = 0; i < size; ++i) {
             System.out.println(data[i] + " ");
         }
         System.out.println();
@@ -45,8 +96,23 @@ public class MyArray {
     public static void main(String[] args) {
         MyArray arr = new MyArray(5);
         arr.push(1);
+        arr.push(2);
+        arr.push(3);
+        arr.push(4);
+        arr.push(5);
+        arr.push(1);
+        arr.pop();
+        arr.insert(0, 0);
         arr.printAll();
-
+        MyArray a1 = new MyArray(4);
+        a1.insert(0,1);
+        a1.insert(1,2);
+        a1.insert(2,3);
+        a1.insert(3,4);
+        a1.push(5);
+        a1.push(6);
+        a1.delete(0);
+        a1.printAll();
     }
 
 
